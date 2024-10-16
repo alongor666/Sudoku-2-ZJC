@@ -207,7 +207,7 @@
             }
             .game-area {
                 flex-direction: column;
-                height: 100%;
+                height: auto;
             }
             .sudoku-board {
                 width: 100%;
@@ -215,24 +215,24 @@
                 max-height: 100vw;
                 margin-bottom: 10px;
             }
+            .cell {
+                font-size: 3.5vw; /* 调整主数字大小 */
+            }
+            .cell .mini-grid {
+                font-size: 1.2vw; /* 调整mini-grid数字大小 */
+            }
             .controls-panel {
                 width: 100%;
                 padding-left: 0;
                 overflow-y: auto;
                 flex-grow: 1;
             }
-            .cell {
-                font-size: 4vw;
-            }
-            .cell .mini-grid {
-                font-size: 2vw;
-            }
             #numberPad {
-                position: sticky;
-                bottom: 0;
+                order: -1; /* 将数字输入区移到最前面 */
+                position: static; /* 取消固定定位 */
                 background-color: #f9f9f9;
                 padding: 10px 0;
-                z-index: 1000;
+                margin-bottom: 10px;
             }
             .number-btn {
                 padding: 10px;
@@ -1105,8 +1105,11 @@
             function adjustLayoutForMobile() {
                 if (window.innerWidth <= 768) {
                     const numberPad = document.getElementById('numberPad');
-                    const controlsPanel = document.querySelector('.controls-panel');
-                    controlsPanel.insertBefore(numberPad, controlsPanel.firstChild);
+                    const gameArea = document.querySelector('.game-area');
+                    const sudokuBoard = document.querySelector('.sudoku-board');
+                    
+                    // 将数字输入区移动到数独板下方
+                    gameArea.insertBefore(numberPad, sudokuBoard.nextSibling);
                 }
             }
 
